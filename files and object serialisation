@@ -1,0 +1,63 @@
+Java code on files and object serialisation
+
+ChatGPT
+Certainly! Java provides a mechanism called object serialization that allows you to convert an object into a sequence of bytes, which can be saved to a file or sent over a network. Here's an example of Java code that demonstrates file operations and object serialization:
+
+java
+Copy code
+import java.io.*;
+
+// Define a class that implements Serializable interface
+class Person implements Serializable {
+    private static final long serialVersionUID = 1L; // Used for version control during deserialization
+    private String name;
+    private int age;
+
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    public String toString() {
+        return "Person [name=" + name + ", age=" + age + "]";
+    }
+}
+
+public class SerializationExample {
+
+    public static void main(String[] args) {
+        // Serialize an object to a file
+        serializeObjectToFile();
+
+        // Deserialize an object from a file
+        deserializeObjectFromFile();
+    }
+
+    private static void serializeObjectToFile() {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("person.ser"))) {
+            // Create a Person object
+            Person person = new Person("John Doe", 25);
+
+            // Serialize the object to a file
+            oos.writeObject(person);
+
+            System.out.println("Object has been serialized to person.ser");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void deserializeObjectFromFile() {
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("person.ser"))) {
+            // Deserialize the object from the file
+            Person person = (Person) ois.readObject();
+
+            System.out.println("Object has been deserialized: " + person);
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+}
+In this example, we have a Person class that implements the Serializable interface. The serializeObjectToFile method creates a Person object, serializes it, and writes it to a file named "person.ser". The deserializeObjectFromFile method reads the serialized object from the file and deserializes it back into a Person object.
+
+Remember to handle exceptions appropriately in a real-world scenario, and consider implementing proper error handling and resource management. Also, be cautious about the security implications of deserializing objects from untrusted sources.
