@@ -1,10 +1,3 @@
-Java code on files and object serialisation
-
-ChatGPT
-Certainly! Java provides a mechanism called object serialization that allows you to convert an object into a sequence of bytes, which can be saved to a file or sent over a network. Here's an example of Java code that demonstrates file operations and object serialization:
-
-java
-Copy code
 import java.io.*;
 
 // Define a class that implements Serializable interface
@@ -58,6 +51,3 @@ public class SerializationExample {
         }
     }
 }
-In this example, we have a Person class that implements the Serializable interface. The serializeObjectToFile method creates a Person object, serializes it, and writes it to a file named "person.ser". The deserializeObjectFromFile method reads the serialized object from the file and deserializes it back into a Person object.
-
-Remember to handle exceptions appropriately in a real-world scenario, and consider implementing proper error handling and resource management. Also, be cautious about the security implications of deserializing objects from untrusted sources.
